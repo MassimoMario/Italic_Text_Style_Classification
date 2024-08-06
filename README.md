@@ -16,11 +16,11 @@ The text corpus taken in consideration for the three language are:
 * Neapolitan: _Lo cunto de li cunti_ by Giambattista Basile
 
 # Table of Contents
-- [Structure](Structure)
-- [Requirements](Requirements)
-- [Usage](Usage)
-- [Results](Results)
-- [Bonus](Bonus)
+- [Structure](#Structure)
+- [Requirements](#Requirements)
+- [Usage](#Usage)
+- [Results](#Results)
+- [Bonus](#Bonus)
 
 # Structure
 * [`PRE_TRAINED_TEXT_CLASSIFIER.ipynb`](PRE_TRAINED_TEXT_CLASSIFIER.ipynb) is the main notebook containing pre trained models, classification examples and accuracy computations
