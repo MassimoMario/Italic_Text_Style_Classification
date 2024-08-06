@@ -41,7 +41,7 @@ The text corpus taken in consideration for the three language are:
 First clone the repository:
 
 ```bash
-git clone git@github.com:MassimoMario/Text_Style_Classification_between_3_italic_languages.git
+git clone git@github.com:MassimoMario/Italic_Text_Style_Classification.git
 ```
 
 Make sure to have Pytorch installed:
