@@ -36,6 +36,7 @@ The text corpus taken in consideration for the three language are:
 - Numpy
 - Matplotlib
 - Pytorch
+- Gensim
   
 # Usage
 First clone the repository:
@@ -44,16 +45,20 @@ First clone the repository:
 git clone git@github.com:MassimoMario/Italic_Text_Style_Classification.git
 ```
 
-Make sure to have Pytorch installed:
+Make sure to have Pytorch and Gensim installed:
 ```bash
 pip install torch
+```
+
+```bash
+pip install gensim
 ```
 
 Run cells from [`TEXT_CLASSIFIER.ipynb`](TEXT_CLASSIFIER.ipynb) notebook if you want to train the models yourself, or run [`PRE_TRAINED_TEXT_CLASSIFIER.ipynb`](PRE_TRAINED_TEXT_CLASSIFIER.ipynb) for using pre-trained models. Both notebooks have classification examples  and accuracy computation after every model section.
 # Results
 Here the training curves for these five classifiers:
 
-<img  align='center' src="images/training.png"  width=105% height=105%>
+<img  align='center' src="images/training.png"  width=120% height=120%>
 
 
 
