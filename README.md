@@ -53,6 +53,9 @@ Run cells from [`TEXT_CLASSIFIER.ipynb`](TEXT_CLASSIFIER.ipynb) notebook if you 
 # Results
 Here the training curves for these five classifiers:
 
+<img  align='center' src="images/training.png"  width=95% height=95%>
+
+
 
 Table with prediction accuracies evaluated on test datasets with 1017 sentences for each style:
 
