@@ -58,11 +58,11 @@ Table with prediction accuracies evaluated on test datasets with 1017 sentences 
 
 | Classifier | _Dante_ | _Italian_ | _Neapolitan_ | Overall |
 | --- | --- | --- | --- | --- |
-| CNN | 98.52% | 99.21% | 99.80% | 99.17% |
-| RNN | 98.23% | 97.64% | 97.80% | 97.89% |
-| GRU | 97.54% | 99.21% | 99.60% | 98.78% |
-| LSTM | 98.32% | 99.50% | 99.60% | 99.14% |
-| Transformer | 98.52% | 99.41% | 100% | 99.31% |
+| CNN | 98.13% | 99.21% | 99.80% | 99.04% |
+| RNN | 96.95% | 97.64% | 96.20% | 96.93% |
+| GRU | 96.26% | 99.11% | 99.00% | 98.12% |
+| LSTM | 97.93% | 99.41% | 99.40% | 98.91% |
+| Transformer | 98.91% | 99.41% | 99.80% | 99.37% |
 
 
 # Bonus
