@@ -40,6 +40,7 @@ def custom_dataset(file1 : str, file2 : str, file3 : str, sequence_length, embed
     ----------
     file1 : str, name of the file containing the first corpus
     file2 : str, name of the file containing the second corpus
+    file3 : str, name of the file containing the third corpus
     sequence_length : int
     embedding_dim : int, number of dimension for the embedded words using Word2vec model
     batch_size : int
@@ -56,8 +57,9 @@ def custom_dataset(file1 : str, file2 : str, file3 : str, sequence_length, embed
     idx2word : dictionary from indices to words
     word2idx : dictionart from words to indices
     vocab_size : int, number of unique tokens
-    style0_val : torch tensor containing every validation data belonging to first style
-    style1_val : torch tensor containing every validation data belonging to second style'''
+    style0_test : torch tensor containing every test data belonging to first style
+    style1_test : torch tensor containing every test data belonging to second style
+    style3_test : torch tensor containing every test data belonging to third style'''
 
     # reading the two corpus
     with open(file1, 'r', encoding='utf-8') as f:

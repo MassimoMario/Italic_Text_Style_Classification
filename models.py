@@ -5,6 +5,19 @@ from torch.nn import functional as F
 
 
 class CNNClassifier(nn.Module):
+    ''' Class of a CNN Classifier for text, made up of Conv2d layers
+
+    Attributes
+    ----------
+    embedding_matrix : 2d torch tensor matrix from word2vec embedding
+    num_classes : int, number of classes
+    num_filters : int, number of filters in the Conv2d layer
+    kernel_sizes : list of int, sizes of kernels in Conv2d layers
+
+    Methods
+    ----------
+    forward(x) : forward pass of the Classifier'''
+
     def __init__(self, embedding_matrix, num_classes, num_filters, kernel_sizes):
         super(CNNClassifier, self).__init__()
         self.embedding_dim = embedding_matrix.shape[1]
@@ -14,12 +27,28 @@ class CNNClassifier(nn.Module):
         self.fc = nn.Linear(num_filters * len(kernel_sizes), num_classes)
         
     def forward(self,x):
+        ''' Forward pass function
+        
+        Input
+        ----------
+        x : 2D torch tensor tensor, input sentence with shape [Batch size, Sequence length]
+        
+        Returns
+        ----------
+        out : 2D torch tensor with probabilities for every class'''
+
+        # Word Embedding
         x = self.embedding(x)
         x = x.unsqueeze(1)
+
+        # Convolution layers and Max pool
         conv_results = [F.relu(conv(x)).squeeze(3) for conv in self.conv_layers]
         pooled = [F.max_pool1d(conv, conv.shape[2]).squeeze(2) for conv in conv_results]
+
+        # Concatenation of pooled output and Linear layer to num_class dimensions
         cat = torch.cat(pooled, dim = 1)
         out = self.fc(cat).unsqueeze(0)
+
         return F.softmax(out, dim=-1)
     
     
@@ -29,27 +58,17 @@ class CNNClassifier(nn.Module):
 
 
 class RNNClassifier(nn.Module):
-    ''' Class of a VAE where both Encoder and Decoder are RNNs with GRU units
+    ''' Class of a RNN Classifier for text, made up of a Recursive Neural Network
 
     Attributes
     ----------
     embedding_matrix : 2d torch tensor matrix from word2vec embedding
-    hidden_dim : int, dimension of RNNs hidden state
-    latent_dim : int, dimension of the VAE latent space
-    style_dim : int, dimension of the style space within the latent space
-    content_dim : int, dimension of the content space within the latent 
-    vocab_size : int, number of unique tokens in the dataset
-    sos_token : torch tensor of the 'start of the sequence' token
-    num_layers : int, number of RNNs layers
+    hidden_dim : int, number of dimensions of hidden states
+    num_layers : int, number of RNN layers
 
-    
     Methods
-    -------
-    forward(x) : perform the forward pass of the VAE
-    reparametrization(mu, log_var) : perform the reparametrization trick
-    reconstruction(x) : inference for reconstruction
-    TST(x, new_style) : inference for Text Style Transfer
-    '''
+    ----------
+    forward(x) : forward pass of the Classifier'''
 
     def __init__(self, embedding_matrix, hidden_dim, num_layers):
         super(RNNClassifier, self).__init__()
@@ -62,7 +81,8 @@ class RNNClassifier(nn.Module):
         self.fc = nn.Linear(hidden_dim, 3)
 
     def forward(self, x):
-        ''' Performs the VAE forward pass 
+        ''' Forward pass  function
+
         Input
         -------
         x : torch tensor with shape [Batch_size, Sequence_length], input sequence
@@ -70,14 +90,14 @@ class RNNClassifier(nn.Module):
 
         Returns
         -------
-        '''
+        pred_labels : 2D torch tensor with probabilities for every class'''
 
-        # embedding input and GRU encoder pass
+        # Word Embedding mbedding input and  RNN pass
         embedded_input = self.embedding(x)
         embedded_input = self.layer_norm(embedded_input)
         _, hn = self.encoder(embedded_input)
         
-
+        # Predicted labels from the last hidden state of the RNN
         pred_label = self.fc(hn)
 
         return pred_label
@@ -90,27 +110,17 @@ class RNNClassifier(nn.Module):
 
 
 class GRUClassifier(nn.Module):
-    ''' Class of a VAE where both Encoder and Decoder are RNNs with GRU units
+    ''' Class of a GRU Classifier for text, made up of a Recursive Neural Network with GRU cells
 
     Attributes
     ----------
     embedding_matrix : 2d torch tensor matrix from word2vec embedding
-    hidden_dim : int, dimension of RNNs hidden state
-    latent_dim : int, dimension of the VAE latent space
-    style_dim : int, dimension of the style space within the latent space
-    content_dim : int, dimension of the content space within the latent 
-    vocab_size : int, number of unique tokens in the dataset
-    sos_token : torch tensor of the 'start of the sequence' token
-    num_layers : int, number of RNNs layers
+    hidden_dim : int, number of dimensions of hidden states
+    num_layers : int, number of RNN layers
 
-    
     Methods
-    -------
-    forward(x) : perform the forward pass of the VAE
-    reparametrization(mu, log_var) : perform the reparametrization trick
-    reconstruction(x) : inference for reconstruction
-    TST(x, new_style) : inference for Text Style Transfer
-    '''
+    ----------
+    forward(x) : forward pass of the Classifier'''
 
     def __init__(self, embedding_matrix, hidden_dim, num_layers):
         super(GRUClassifier, self).__init__()
@@ -123,7 +133,8 @@ class GRUClassifier(nn.Module):
         self.fc = nn.Linear(hidden_dim, 3)
 
     def forward(self, x):
-        ''' Performs the VAE forward pass 
+        ''' Forward pass  function
+        
         Input
         -------
         x : torch tensor with shape [Batch_size, Sequence_length], input sequence
@@ -131,14 +142,14 @@ class GRUClassifier(nn.Module):
 
         Returns
         -------
-        '''
+        pred_labels : 2D torch tensor with probabilities for every class'''
 
-        # embedding input and GRU encoder pass
+        # Word Embedding input and GRU forward pass
         embedded_input = self.embedding(x)
         embedded_input = self.layer_norm(embedded_input)
         _, hn = self.encoder(embedded_input)
         
-
+        # Predicted labels from last hidden state of the GRU
         pred_label = self.fc(hn)
 
         return pred_label
@@ -149,27 +160,17 @@ class GRUClassifier(nn.Module):
 
 
 class LSTMClassifier(nn.Module):
-    ''' Class of a VAE where both Encoder and Decoder are RNNs with GRU units
+    ''' Class of a LSTM Classifier for text, made up of a Recursive Neural Network with LSTM cells
 
     Attributes
     ----------
     embedding_matrix : 2d torch tensor matrix from word2vec embedding
-    hidden_dim : int, dimension of RNNs hidden state
-    latent_dim : int, dimension of the VAE latent space
-    style_dim : int, dimension of the style space within the latent space
-    content_dim : int, dimension of the content space within the latent 
-    vocab_size : int, number of unique tokens in the dataset
-    sos_token : torch tensor of the 'start of the sequence' token
-    num_layers : int, number of RNNs layers
+    hidden_dim : int, number of dimensions of hidden states
+    num_layers : int, number of RNN layers
 
-    
     Methods
-    -------
-    forward(x) : perform the forward pass of the VAE
-    reparametrization(mu, log_var) : perform the reparametrization trick
-    reconstruction(x) : inference for reconstruction
-    TST(x, new_style) : inference for Text Style Transfer
-    '''
+    ----------
+    forward(x) : forward pass of the Classifier'''
 
     def __init__(self, embedding_matrix, hidden_dim, num_layers):
         super(LSTMClassifier, self).__init__()
@@ -182,7 +183,8 @@ class LSTMClassifier(nn.Module):
         self.fc = nn.Linear(hidden_dim, 3)
 
     def forward(self, x):
-        ''' Performs the VAE forward pass 
+        ''' Forward pass  function
+        
         Input
         -------
         x : torch tensor with shape [Batch_size, Sequence_length], input sequence
@@ -190,14 +192,15 @@ class LSTMClassifier(nn.Module):
 
         Returns
         -------
-        '''
+        pred_labels : 2D torch tensor with probabilities for every class'''
 
-        # embedding input and GRU encoder pass
+        # Word Embedding input and LSTM forward pass
         embedded_input = self.embedding(x)
         embedded_input = self.layer_norm(embedded_input)
         _, (hn, cn) = self.encoder(embedded_input)
         
 
+        # Predicted labels from last hidden state of the LSTM
         pred_label = self.fc(hn)
 
         return pred_label
@@ -207,41 +210,30 @@ class LSTMClassifier(nn.Module):
 
 
 class TClassifier(nn.Module):
-    ''' Class of a VAE where both Encoder and Decoder are RNNs with GRU units
+    ''' Class of a Transformer Classifier for text, made up of a Transformer Encoder
 
     Attributes
     ----------
     embedding_matrix : 2d torch tensor matrix from word2vec embedding
-    hidden_dim : int, dimension of RNNs hidden state
-    latent_dim : int, dimension of the VAE latent space
-    style_dim : int, dimension of the style space within the latent space
-    content_dim : int, dimension of the content space within the latent 
-    vocab_size : int, number of unique tokens in the dataset
-    sos_token : torch tensor of the 'start of the sequence' token
-    num_layers : int, number of RNNs layers
 
-    
     Methods
-    -------
-    forward(x) : perform the forward pass of the VAE
-    reparametrization(mu, log_var) : perform the reparametrization trick
-    reconstruction(x) : inference for reconstruction
-    TST(x, new_style) : inference for Text Style Transfer
-    '''
+    ----------
+    forward(x) : forward pass of the Classifier'''
 
-    def __init__(self, embedding_matrix, hidden_dim, num_layers):
+    def __init__(self, embedding_matrix):
         super(TClassifier, self).__init__()
 
         self.embedding_dim = embedding_matrix.shape[1]
 
         self.embedding = nn.Embedding.from_pretrained(embedding_matrix, freeze = True)
         self.layer_norm = nn.LayerNorm(self.embedding_dim)
-        self.encoder_layer = nn.TransformerEncoderLayer(300, 10, batch_first = True)
+        self.encoder_layer = nn.TransformerEncoderLayer(self.embedding_dim, 10, batch_first = True)
         self.encoder = nn.TransformerEncoder(self.encoder_layer, 1)
         self.fc = nn.Linear(self.embedding_dim, 3)
 
     def forward(self, x):
-        ''' Performs the VAE forward pass 
+        ''' Forward pass  function
+        
         Input
         -------
         x : torch tensor with shape [Batch_size, Sequence_length], input sequence
@@ -249,15 +241,18 @@ class TClassifier(nn.Module):
 
         Returns
         -------
-        '''
+        pred_labels : 2D torch tensor with probabilities for every class'''
 
-        # embedding input and GRU encoder pass
+        # Word Embedding input and Transformer Encoder forward pass
         embedded_input = self.embedding(x)
         embedded_input = self.layer_norm(embedded_input)
         out = self.encoder(embedded_input)
         
+        # Mean over Sequence length dimension
         out = out.mean(1).unsqueeze(1)
         out = out.permute(1,0,2)
+
+        # Predicted labels from last hidden state of the GRU
         pred_label = self.fc(out)
 
         return pred_label
