@@ -22,7 +22,7 @@ def divide_text(text, sequence_length):
     output_text : 2D list of words with shape [text_length/sequence_length, sequence_length]'''
 
     words = text.split()
-    grouped_words = [' '.join(words[i:i+sequence_length]) for i in range(0,len(words),int(sequence_length-2))]  
+    grouped_words = [' '.join(words[i:i+sequence_length]) for i in range(0,len(words),int(sequence_length/2))]  
     output_text = [grouped_words[i].split() for i in range(len(grouped_words)) if len(grouped_words[i].split()) == sequence_length]
 
     return output_text
