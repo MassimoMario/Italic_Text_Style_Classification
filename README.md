@@ -53,7 +53,7 @@ Run cells from [`TEXT_CLASSIFIER.ipynb`](TEXT_CLASSIFIER.ipynb) notebook if you 
 # Results
 Here the training curves for these five classifiers:
 
-<img  align='center' src="images/training.png"  width=95% height=95%>
+<img  align='center' src="images/training.png"  width=105% height=105%>
 
 
 
