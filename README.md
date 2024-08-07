@@ -51,11 +51,33 @@ pip install torch
 
 Run cells from [`TEXT_CLASSIFIER.ipynb`](TEXT_CLASSIFIER.ipynb) notebook if you want to train the models yourself, or run [`PRE_TRAINED_TEXT_CLASSIFIER.ipynb`](PRE_TRAINED_TEXT_CLASSIFIER.ipynb) for using pre-trained models. Both notebooks have classification examples  and accuracy computation after every model section.
 # Results
+Here the training curves for these five classifiers:
+
+
+Table with prediction accuracies evaluated on test datasets with 1017 sentences for each style:
+
+| Classifier | _Dante_ | _Italian_ | _Neapolitan_ | Overall |
+| --- | --- | --- | --- | --- |
+| CNN | 98.52% | 99.21% | 99.80% | 99.17% |
+| RNN | 98.23% | 97.64% | 97.80% | 97.89% |
+| GRU | 97.54% | 99.21% | 99.60% | 98.78% |
+| LSTM | 98.32% | 99.50% | 99.60% | 99.14% |
+| Transformer | 98.52% | 99.41% | 100% | 99.31% |
+
 
 # Bonus
 Since when we italians are young, we learn in school that _Inferno, Purgatorio_ and _Paradiso_, the three main parts of _Divina Commedia_, have been written in 3 different styles.
 
 Can these models capture these stylistic differences? 
 
+| Classifier | _Inferno_ | _Purgatorio_ | _Paradiso_ | Overall |
+| --- | --- | --- | --- | --- |
+| CNN | 57.01% | 20.82% | 70.65% | 49.49% |
+| RNN | 52.33% | 24.04% | 38.32% | 38.23% |
+| GRU | 47.66% | 28.16% | 50.00% | 41.93% |
+| LSTM | 59.35% | 25.51% | 63.17% | 49.34% |
+| Transformer | 48.53% | 39.88% | 60.77% | 49.73% |
 
-It seems they can't  😞
+From these accuracies it seems they can't  😞
+
+Even if on _Inferno_ and _Paradiso_ test set models perform much better respect to predicting _Purgatorio_ test set. I guess it's because _Inferno_ and _Paradiso_ have a more recognizable writing style given by a precise choice of words by Dante.
