@@ -64,13 +64,13 @@ Here the training curves for these five classifiers:
 
 Table with prediction accuracies evaluated on test datasets with 1017 sentences for each style:
 
-| Classifier | _Dante_ | _Italian_ | _Neapolitan_ | Overall |
-| --- | --- | --- | --- | --- |
-| CNN | 98.13% | 99.21% | 99.80% | 99.04% |
-| RNN | 96.95% | 97.64% | 96.20% | 96.93% |
-| GRU | 96.26% | 99.11% | 99.00% | 98.12% |
-| LSTM | 97.93% | 99.41% | 99.40% | 98.91% |
-| Transformer | 98.91% | 99.41% | 99.80% | 99.37% |
+| Classifier | \# Parameters | _Dante_ | _Italian_ | _Neapolitan_ | Overall |
+| --- | --- | --- | --- | --- | --- |
+| CNN | 8139 | 98.13% | 99.21% | 99.80% | 99.04% |
+| RNN | 3107 | 96.95% | 97.64% | 96.20% | 96.93% |
+| GRU | 8067 | 96.26% | 99.11% | 99.00% | 98.12% |
+| LSTM | 10547 | 97.93% | 99.41% | 99.40% | 98.91% |
+| Transformer | 3188599 | 98.91% | 99.41% | 99.80% | 99.37% |
 
 
 # Bonus
@@ -78,13 +78,13 @@ Since when we italians are young, we learn in school that _Inferno, Purgatorio_ 
 
 Can these models capture these stylistic differences? 
 
-| Classifier | \# Parameters | _Inferno_ | _Purgatorio_ | _Paradiso_ | Overall |
-| --- | --- | --- | --- | --- | --- |
-| CNN | 8139 | 57.01% | 20.82% | 70.65% | 49.49% |
-| RNN | 3107 | 52.33% | 24.04% | 38.32% | 38.23% |
-| GRU | 8067 | 47.66% | 28.16% | 50.00% | 41.93% |
-| LSTM | 10547 | 59.35% | 25.51% | 63.17% | 49.34% |
-| Transformer | 3188599 | 48.53% | 39.88% | 60.77% | 49.73% |
+| Classifier |  _Inferno_ | _Purgatorio_ | _Paradiso_ | Overall |
+| --- | --- | --- | --- | --- |
+| CNN | 57.01% | 20.82% | 70.65% | 49.49% |
+| RNN | 52.33% | 24.04% | 38.32% | 38.23% |
+| GRU | 47.66% | 28.16% | 50.00% | 41.93% |
+| LSTM | 59.35% | 25.51% | 63.17% | 49.34% |
+| Transformer | 48.53% | 39.88% | 60.77% | 49.73% |
 
 From these accuracies it seems they can't  😞
 
