@@ -78,13 +78,13 @@ Since when we italians are young, we learn in school that _Inferno, Purgatorio_ 
 
 Can these models capture these stylistic differences? 
 
-| Classifier | _Inferno_ | _Purgatorio_ | _Paradiso_ | Overall |
-| --- | --- | --- | --- | --- |
-| CNN | 57.01% | 20.82% | 70.65% | 49.49% |
-| RNN | 52.33% | 24.04% | 38.32% | 38.23% |
-| GRU | 47.66% | 28.16% | 50.00% | 41.93% |
-| LSTM | 59.35% | 25.51% | 63.17% | 49.34% |
-| Transformer | 48.53% | 39.88% | 60.77% | 49.73% |
+| Classifier | \# Parameters | _Inferno_ | _Purgatorio_ | _Paradiso_ | Overall |
+| --- | --- | --- | --- | --- | --- |
+| CNN | 8139 | 57.01% | 20.82% | 70.65% | 49.49% |
+| RNN | 3107 | 52.33% | 24.04% | 38.32% | 38.23% |
+| GRU | 8067 | 47.66% | 28.16% | 50.00% | 41.93% |
+| LSTM | 10547 | 59.35% | 25.51% | 63.17% | 49.34% |
+| Transformer | 3188599 | 48.53% | 39.88% | 60.77% | 49.73% |
 
 From these accuracies it seems they can't  😞
 
