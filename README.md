@@ -10,7 +10,7 @@ The Classifiers taken in consideration are CNN, RNNs, and Transformer based:
 * LSTM Classifier: takes the last hidden state of a Recursive Neural Network with LSTM cell and classifies sentences from it
 * Transformer Classifier: averages the output of a Transformer Encoder over words in a sentence. It's based of self-attention mechanism
 
-The text corpus taken in consideration for the three language are:
+The Word Embedding layer has been initialized using a Word2vec model trained on these three corpus, one for each language:
 * Dante: _Divina Commedia_
 * Italian: _Uno, nessuno e centomila_ by Luigi Pirandello, _I Malavoglia_ by Giovanni Verga
 * Neapolitan: _Lo cunto de li cunti_ by Giambattista Basile
